@@ -37,6 +37,6 @@ The app demonstrates best practices in responsive design and scalability, creati
 ## Deployment
 
 This project is deployed on GitHub Pages: [Visit Simple Todo App here!]
-(ADD LINK HERE)
+[(ADD LINK HERE)](https://github.com/BritniKay/se_project_todo-app.git)
 
 Ready to take control of your tasks? Go ahead, add a few to-dos, and see how the magic unfolds!
