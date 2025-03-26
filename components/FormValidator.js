@@ -36,16 +36,20 @@ export default class FormValidator {
     }
   }
 
+  _setSubmitButtonDisabled() {
+    this._submitButton.disabled = true;
+    this._submitButton.classList.add(this._settings.inactiveButtonClass);
+  }
+
   _toggleButtonState() {
     const hasInvalidInput = this._inputList.some(
       (inputElement) => !inputElement.validity.valid
     );
     if (hasInvalidInput) {
-      this._submitButton.classList.add(this._settings.inactiveButtonClass);
-      this._submitButton.disabled = true;
+      this._setSubmitButtonDisabled();
     } else {
-      this._submitButton.classList.remove(this._settings.inactiveButtonClass);
       this._submitButton.disabled = false;
+      this._submitButton.classList.remove(this._settings.inactiveButtonClass);
     }
   }
 
@@ -61,14 +65,14 @@ export default class FormValidator {
 
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
+      this.resetValidation();
       evt.preventDefault();
     });
     this._setEventListeners();
   }
 
-  disableSubmitButton() {
-    this._submitButton.classList.add(this._settings.inactiveButtonClass);
-    this._submitButton.disabled = true;
+  resetValidation() {
     this._formElement.reset();
+    this._setSubmitButtonDisabled();
   }
 }
