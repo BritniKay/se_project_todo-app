@@ -26,7 +26,9 @@ export default class Todo {
 
   getView() {
     this._nameElement.textContent = this._data.name;
-    this._dateElement.textContent = this._data.date || "No due date";
+    this._dateElement.textContent = this._data.date
+      ? new Date(this._data.date).toLocaleDateString()
+      : "No due date";
 
     const uniqueId = this._data.id;
     this._checkbox.id = uniqueId;
