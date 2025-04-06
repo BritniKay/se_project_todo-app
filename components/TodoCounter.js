@@ -5,7 +5,8 @@ export default class TodoCounter {
       console.error(`Element with selector '${selector}' not found.`);
       return;
     }
-    this._completed = 0;
+
+    this._completed = todos.filter((todo) => todo.completed).length; // Corrected to count completed todos
     this._total = todos.length;
     this._updateText();
   }

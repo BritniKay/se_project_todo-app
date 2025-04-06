@@ -1,7 +1,9 @@
 export default class Todo {
-  constructor(data, selector) {
+  constructor(data, selector, handleChange, handleDelete) {
     this._data = data;
     this._selector = selector;
+    this._handleChange = handleChange;
+    this._handleDelete = handleDelete;
 
     this._templateElement = document.querySelector(this._selector).content;
     this._element = this._templateElement
@@ -12,15 +14,19 @@ export default class Todo {
     this._nameElement = this._element.querySelector(".todo__name");
     this._dateElement = this._element.querySelector(".todo__date");
     this._deleteButton = this._element.querySelector(".todo__delete-btn");
+
+    this._setEventListeners();
   }
 
   _setEventListeners() {
     this._checkbox.addEventListener("change", () => {
       this._element.classList.toggle("todo_completed", this._checkbox.checked);
+      this._handleChange(this._checkbox.checked);
     });
 
     this._deleteButton.addEventListener("click", () => {
       this._element.remove();
+      this._handleDelete(this._checkbox.checked);
     });
   }
 
@@ -33,8 +39,7 @@ export default class Todo {
     const uniqueId = this._data.id;
     this._checkbox.id = uniqueId;
     this._element.querySelector(".todo__label").setAttribute("for", uniqueId);
-
-    this._setEventListeners();
+    this._checkbox.checked = this._data.completed;
 
     return this._element;
   }
